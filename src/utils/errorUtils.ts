@@ -3,6 +3,7 @@ type AppErrorTypes = "conflict" | "not_found" | "unauthorized" | "wrong_schema";
 export interface AppError {
   type: AppErrorTypes;
   message: string;
+  status: number;
 }
 
 export function isAppError(error: object): error is AppError {
@@ -19,17 +20,17 @@ export function errorTypeToStatusCode(type: AppErrorTypes) {
 }
 
 export function conflictError(message: string): AppError {
-  return { type: "conflict", message };
+  return { type: "conflict", message, status: errorTypeToStatusCode("conflict") };
 }
 
 export function notFoundError(message: string): AppError {
-  return { type: "not_found", message };
+  return { type: "not_found", message, status: errorTypeToStatusCode("not_found") };
 }
 
 export function unauthorizedError(message: string): AppError {
-  return { type: "unauthorized", message };
+  return { type: "unauthorized", message, status: errorTypeToStatusCode("unauthorized") };
 }
 
 export function wrongSchemaError(message: string): AppError {
-  return { type: "wrong_schema", message };
+  return { type: "wrong_schema", message, status: errorTypeToStatusCode("wrong_schema") };
 }

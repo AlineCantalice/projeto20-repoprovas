@@ -13,7 +13,7 @@ export async function signUp(user: CreateUserData) {
     const existingUser = await userRepository.findUserByEmail(user.email);
 
     if (existingUser) {
-        throw errorUtils.conflictError("");
+        throw errorUtils.conflictError("Email already in use!");
     }
 
     const SALT = 10;
