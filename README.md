@@ -34,8 +34,21 @@ POST /signin
     - Login to registered users
     - headers: {}
     - body: {
-    "email": "lorem@gmail.com",
-    "password": "loremipsum"
+        "email": "lorem@gmail.com",
+        "password": "loremipsum"
+    }
+```
+
+```yml 
+POST /tests
+    - Create tests
+    - headers: {}
+    - body: {
+        "name": "test",
+        "pdfUrl": "https://www.google.com/",
+        "category": "Projeto",
+        "discipline": "React",
+        "teacher": "Diego Pinho"
     }
 ```
    
