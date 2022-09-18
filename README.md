@@ -51,6 +51,61 @@ POST /tests
         "teacher": "Diego Pinho"
     }
 ```
+
+```yml 
+GET /tests
+    - Create tests
+    - headers: {}
+    - body: {}
+    - response: [
+  {
+    "id": 2,
+    "number": 2,
+    "disciplines": [
+      {
+        "id": 2,
+        "name": "JavaScript",
+        "teachersDisciplines": [
+          {
+            "tests": [
+              {
+                "category": {
+                  "id": 2,
+                  "name": "Projeto",
+                  "tests": [
+                    {
+                      "id": 1,
+                      "name": "test",
+                      "pdfUrl": "https://www.google.com/",
+                      "teacherDiscipline": {
+                        "teacher": {
+                          "id": 1,
+                          "name": "Diego Pinho"
+                        }
+                      }
+                    },
+                    {
+                      "id": 2,
+                      "name": "test2",
+                      "pdfUrl": "http://agitated-presidency.biz",
+                      "teacherDiscipline": {
+                        "teacher": {
+                          "id": 1,
+                          "name": "Diego Pinho"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
+```
    
 ***
 
