@@ -14,24 +14,32 @@ model users {
   id       Int    @id @default(autoincrement())
   email    String @unique
   password String
+
+  @@map("user")
 }
 
 model categories {
   id    Int     @id @default(autoincrement())
   name  String  @unique
   tests tests[]
+
+  @@map("category")
 }
 
 model terms {
   id          Int           @id @default(autoincrement())
   number      Int           @unique
   disciplines disciplines[]
+
+  @@map("term")
 }
 
 model teachers {
   id                  Int                   @id @default(autoincrement())
   name                String                @unique
   teachersDisciplines teachersDisciplines[]
+
+  @@map("teacher")
 }
 
 model disciplines {
@@ -40,6 +48,8 @@ model disciplines {
   term                terms                 @relation(fields: [termId], references: [id])
   termId              Int
   teachersDisciplines teachersDisciplines[]
+
+  @@map("discipline")
 }
 
 model teachersDisciplines {
@@ -49,6 +59,9 @@ model teachersDisciplines {
   discipline   disciplines @relation(fields: [disciplineId], references: [id])
   disciplineId Int
   tests        tests[]
+
+  @@unique([teacherId, disciplineId])
+  @@map("teacherDiscipline")
 }
 
 model tests {
@@ -59,4 +72,6 @@ model tests {
   categoryId          Int
   teacherDiscipline   teachersDisciplines @relation(fields: [teacherDisciplineId], references: [id])
   teacherDisciplineId Int
+
+  @@map("test")
 }
