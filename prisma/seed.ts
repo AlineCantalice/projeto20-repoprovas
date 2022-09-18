@@ -71,7 +71,13 @@ async function main() {
         { teacherId: 2, disciplineId: 6 },
     ];
 
-    await prisma.teachersDisciplines.createMany({ data: teachersDisciplines });
+    teachersDisciplines.forEach(async (item) => {
+        await prisma.teachersDisciplines.upsert({
+            where: { teacherId_disciplineId: { teacherId: item.teacherId, disciplineId: item.disciplineId } },
+            update: {},
+            create: item
+        });
+    });
 }
 
 main().catch(e => {
