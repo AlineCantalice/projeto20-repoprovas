@@ -48,4 +48,15 @@ describe('Test create test POST /tests', () => {
         expect(result.status).toBe(404);
     });
 
-})
+});
+
+describe('Test get all tests, route GET /tests', () => {
+
+    it('Tests get all tests, expect status 200 and array', async () => {
+        const result = await supertest(app).get('/tests').send();
+
+        expect(result.status).toBe(200);
+        expect(result.body).toBeInstanceOf(Array);
+    });
+
+});
