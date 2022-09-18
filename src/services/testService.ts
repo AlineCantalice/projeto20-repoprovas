@@ -5,6 +5,7 @@ import * as teacherDisciplineService from "./teacherDisciplineService";
 import * as errorUtils from '../utils/errorUtils';
 import * as repository from '../repositories/testRepository';
 import { CreateTestData } from "../types/testTypes";
+import * as termsRepository from "../repositories/termRepository"
 
 export async function createTest(body: any) {
 
@@ -40,5 +41,9 @@ export async function createTest(body: any) {
     }
 
     await repository.insert(test);
+}
+
+export async function getAllTests() {
+    return termsRepository.findAll();
 }
 
