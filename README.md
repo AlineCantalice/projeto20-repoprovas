@@ -22,17 +22,19 @@ RepoProvas is a system for people to share tests. In this API anyone can look fo
 POST /signup
     - Register new user
     - headers: {}
-    - body:{
+    - body: {
         "email": "lorem@gmail.com",
         "password": "loremipsum",
         "confirmPassword": "loremipsum"
     }
 ```
+
+**Note**: The following routes need the token of the user.
     
 ```yml 
 POST /signin
     - Login to registered users
-    - headers: {}
+    - headers: {Authentication: token}
     - body: {
         "email": "lorem@gmail.com",
         "password": "loremipsum"
@@ -42,7 +44,7 @@ POST /signin
 ```yml 
 POST /tests
     - Create tests
-    - headers: {}
+    - headers: {Authentication: token}
     - body: {
         "name": "test",
         "pdfUrl": "https://www.google.com/",
@@ -55,7 +57,7 @@ POST /tests
 ```yml 
 GET /tests/disciplines
     - Get all tests by disciplines
-    - headers: {}
+    - headers: {Authentication: token}
     - body: {}
     - response: [
   {
@@ -93,7 +95,7 @@ GET /tests/disciplines
 ```yml
 GET /tests/teachers
     - Get all tests by teachers
-    - headers: {}
+    - headers: {Authentication: token}
     - body: {}
     - response: [
   {
