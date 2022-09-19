@@ -73,3 +73,34 @@ export async function getAllTestsByDiscipline() {
         }
     })
 }
+
+export async function getAllTestsByTeachers() {
+    const testsByTeachers = await repository.getAllTestsByTeacher();
+
+    return testsByTeachers.map(teachers => {
+        return {
+            id: teachers.teacher.id,
+            name: teachers.teacher.name,
+            categories: teachers.teacher.teachersDisciplines.map(categories => {
+                return categories.tests.map(category => {
+                    return {
+                        id: category.category.id,
+                        name: category.category.name,
+                        tests: {
+                            id: category.id,
+                            name: category.name,
+                            pdfUrl: category.pdfUrl,
+                            discipline: category.category.tests.map(disciplines => {
+                                return {
+                                    id: disciplines.id,
+                                    name: disciplines.name,
+                                    terms: disciplines.teacherDiscipline.discipline.term
+                                }
+                            })
+                        }
+                    }
+                })
+            })
+        }
+    })
+}

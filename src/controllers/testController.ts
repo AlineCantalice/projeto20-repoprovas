@@ -25,7 +25,7 @@ export async function getTestsFromDiscipline(req: Request, res: Response) {
 
 export async function getTestsFromTeacher(req: Request, res: Response) {
     try {        
-        const tests = await service.getAllTestsByDiscipline();
+        const tests = await service.getAllTestsByTeachers();
 
         res.status(200).send(tests);
     } catch (error: any) {

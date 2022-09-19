@@ -50,10 +50,21 @@ describe('Test create test POST /tests', () => {
 
 });
 
-describe('Test get all tests, route GET /tests', () => {
+describe('Test get all tests, route GET /tests/disciplines', () => {
 
     it('Tests get all tests by disciplines, expect status 200 and array', async () => {
         const result = await supertest(app).get('/tests/disciplines').send();
+
+        expect(result.status).toBe(200);
+        expect(result.body).toBeInstanceOf(Array);
+    });
+
+});
+
+describe('Test get all tests, route GET /tests/teachers', () => {
+
+    it('Tests get all tests by teachers, expect status 200 and array', async () => {
+        const result = await supertest(app).get('/tests/teachers').send();
 
         expect(result.status).toBe(200);
         expect(result.body).toBeInstanceOf(Array);
