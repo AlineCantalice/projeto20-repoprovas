@@ -52,8 +52,8 @@ describe('Test create test POST /tests', () => {
 
 describe('Test get all tests, route GET /tests', () => {
 
-    it('Tests get all tests, expect status 200 and array', async () => {
-        const result = await supertest(app).get('/tests').send();
+    it('Tests get all tests by disciplines, expect status 200 and array', async () => {
+        const result = await supertest(app).get('/tests/disciplines').send();
 
         expect(result.status).toBe(200);
         expect(result.body).toBeInstanceOf(Array);

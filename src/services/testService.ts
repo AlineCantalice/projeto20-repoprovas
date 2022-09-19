@@ -5,7 +5,6 @@ import * as teacherDisciplineService from "./teacherDisciplineService";
 import * as errorUtils from '../utils/errorUtils';
 import * as repository from '../repositories/testRepository';
 import { CreateTestData } from "../types/testTypes";
-import * as termsRepository from "../repositories/termRepository"
 
 export async function createTest(body: any) {
 
@@ -43,7 +42,34 @@ export async function createTest(body: any) {
     await repository.insert(test);
 }
 
-export async function getAllTests() {
-    return termsRepository.findAll();
-}
+export async function getAllTestsByDiscipline() {
+    const testsByDiscipline = await repository.getTestsByDisciplines();
 
+    return testsByDiscipline.map(term => {
+        return {
+            ...term,
+            disciplines: term.disciplines.map(discipline => {
+                return {
+                    id: discipline.id,
+                    name: discipline.name,
+                    categories: discipline.teachersDisciplines.map(categories => {
+                        return categories.tests.map(category => {
+                            return {
+                                id: category.category.id,
+                                name: category.category.name,
+                                tests: category.category.tests.map(tests => {
+                                    return {
+                                        id: tests.id,
+                                        name: tests.name,
+                                        pdfUrl: tests.pdfUrl,
+                                        teacher: tests.teacherDiscipline.teacher
+                                    }
+                                })
+                            }
+                        })
+                    })
+                }
+            })
+        }
+    })
+}

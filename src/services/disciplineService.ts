@@ -1,5 +1,5 @@
-import { getDisciplineIdByName } from "../repositories/disciplineRepository";
+import * as repository from "../repositories/disciplineRepository";
 
 export async function findIdByName(name: string) {
-    return await getDisciplineIdByName(name);
+    return await repository.getDisciplineIdByName(name);
 }

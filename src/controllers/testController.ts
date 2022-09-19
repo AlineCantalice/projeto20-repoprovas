@@ -13,11 +13,19 @@ export async function createTest(req: Request, res: Response) {
     }
 }
 
-export async function getTests(req: Request, res: Response) {
+export async function getTestsFromDiscipline(req: Request, res: Response) {
     try {        
-        const tests = await service.getAllTests();
+        const tests = await service.getAllTestsByDiscipline();
 
-        console.log(tests)
+        res.status(200).send(tests);
+    } catch (error: any) {
+        res.status(error.status).send(error.message);
+    }
+}
+
+export async function getTestsFromTeacher(req: Request, res: Response) {
+    try {        
+        const tests = await service.getAllTestsByDiscipline();
 
         res.status(200).send(tests);
     } catch (error: any) {
