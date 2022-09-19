@@ -86,18 +86,14 @@ export async function getAllTestsByTeachers() {
                     return {
                         id: category.category.id,
                         name: category.category.name,
-                        tests: {
-                            id: category.id,
-                            name: category.name,
-                            pdfUrl: category.pdfUrl,
-                            discipline: category.category.tests.map(disciplines => {
-                                return {
-                                    id: disciplines.id,
-                                    name: disciplines.name,
-                                    terms: disciplines.teacherDiscipline.discipline.term
-                                }
-                            })
-                        }
+                        tests: category.category.tests.map(tests => {
+                            return {
+                                id: tests.id,
+                                name: tests.name,
+                                pdfUrl: tests.pdfUrl,
+                                discipline: tests.teacherDiscipline.discipline
+                            }
+                        })
                     }
                 })
             })

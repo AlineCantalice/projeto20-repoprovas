@@ -53,8 +53,8 @@ POST /tests
 ```
 
 ```yml 
-GET /tests
-    - Create tests
+GET /tests/disciplines
+    - Get all tests by disciplines
     - headers: {}
     - body: {}
     - response: [
@@ -65,43 +65,62 @@ GET /tests
       {
         "id": 2,
         "name": "JavaScript",
-        "teachersDisciplines": [
-          {
-            "tests": [
-              {
-                "category": {
-                  "id": 2,
-                  "name": "Projeto",
-                  "tests": [
-                    {
-                      "id": 1,
-                      "name": "test",
-                      "pdfUrl": "https://www.google.com/",
-                      "teacherDiscipline": {
-                        "teacher": {
-                          "id": 1,
-                          "name": "Diego Pinho"
-                        }
-                      }
-                    },
-                    {
-                      "id": 2,
-                      "name": "test2",
-                      "pdfUrl": "http://agitated-presidency.biz",
-                      "teacherDiscipline": {
-                        "teacher": {
-                          "id": 1,
-                          "name": "Diego Pinho"
-                        }
-                      }
-                    }
-                  ]
+        "categories": [
+          [
+            {
+              "id": 2,
+              "name": "Projeto",
+              "tests": [
+                {
+                  "id": 1,
+                  "name": "test",
+                  "pdfUrl": "https://www.google.com/",
+                  "teacher": {
+                    "id": 1,
+                    "name": "Diego Pinho"
+                  }
                 }
-              }
-            ]
-          }
+              ]
+            }
+          ]
         ]
       }
+    ]
+  }
+]
+```
+
+```yml
+GET /tests/teachers
+    - Get all tests by teachers
+    - headers: {}
+    - body: {}
+    - response: [
+  {
+    "id": 1,
+    "name": "Diego Pinho",
+    "categories": [
+      [
+        {
+          "id": 2,
+          "name": "Projeto",
+          "tests": [
+            {
+              "id": 1,
+              "name": "test",
+              "pdfUrl": "https://www.google.com/",
+              "discipline": {
+                "id": 3,
+                "name": "React",
+                "term": {
+                  "id": 3,
+                  "number": 4
+                }
+              }
+            }
+          ]
+        }
+      ]
     ]
   }
 ]
@@ -133,7 +152,6 @@ GET /tests
 ```ts
     DATABASE_URL=
     PORT=
-    CRYPTR_SECRET=
     JWT_SECRET=
 ```
 5. Generate prisma models that could exist in database:
